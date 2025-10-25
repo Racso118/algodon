@@ -65,9 +65,9 @@ function CrearCitaContent() {
       try {
         const resp = await AuthLogin.listaEspecialidades();
         type CitaRaw = { Especialidad: string };
-        const listaEsp = (resp.citas || []).map((c: unknown) => {
-          const cita = c as CitaRaw;
-          return cita.Especialidad;
+        const listaEsp = (resp.Citas || []).map((c: unknown) => {
+          const Citas = c as CitaRaw;
+          return Citas.Especialidad;
         });
         setEspecialidades(listaEsp);
       } catch (err) {

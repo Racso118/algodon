@@ -193,38 +193,38 @@ export class AuthLogin {
             return { existe: false };
         }
     }
-    static async listarCitas(): Promise<{ message: string; citas: unknown[] }> {
+    static async listarCitas(): Promise<{ message: string; Citas: unknown[] }> {
         try {
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_BK_RUTA}/users/citas`);
-            return response.status === 200 ? response.data : { message: "", citas: [] };
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_BK_RUTA}/users/Citas`);
+            return response.status === 200 ? response.data : { message: "", Citas: [] };
         } catch (error) {
-            console.error("Error al listar citas:", error);
-            return { message: "", citas: [] };
+            console.error("Error al listar Citas:", error);
+            return { message: "", Citas: [] };
         }
     }
-    static async listarCitasPorDPI(DPI: string): Promise<{ message: string; citas: unknown[] }> {
+    static async listarCitasPorDPI(DPI: string): Promise<{ message: string; Citas: unknown[] }> {
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_BK_RUTA}/users/citasusuario`, { DPI });
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BK_RUTA}/users/Citasusuario`, { DPI });
 
-            // Validamos que response.data tenga la propiedad citas y sea un array
-            const citas = Array.isArray(response.data?.citas) ? response.data.citas : [];
+            // Validamos que response.data tenga la propiedad Citas y sea un array
+            const Citas = Array.isArray(response.data?.Citas) ? response.data.Citas : [];
 
             return {
                 message: response.data?.message || "",
-                citas,
+                Citas,
             };
         } catch (error) {
-            console.error("Error al listar citas por DPI:", error);
-            return { message: "", citas: [] }; // Siempre devolvemos un array aunque falle
+            console.error("Error al listar Citas por DPI:", error);
+            return { message: "", Citas: [] }; // Siempre devolvemos un array aunque falle
         }
     }
-    static async listaEspecialidades(): Promise<{ message: string; citas: unknown[] }> {
+    static async listaEspecialidades(): Promise<{ message: string; Citas: unknown[] }> {
         try {
             const response = await axios.get(`${process.env.NEXT_PUBLIC_BK_RUTA}/users/especialidades`);
-            return response.status === 200 ? response.data : { message: "", citas: [] };
+            return response.status === 200 ? response.data : { message: "", Citas: [] };
         } catch (error) {
             console.error("Error al listar especialidades:", error);
-            return { message: "", citas: [] };
+            return { message: "", Citas: [] };
         }
     }
     static async ListaFichasUsuario(DPI: string): Promise<FichaUsuario[]> {
@@ -309,33 +309,33 @@ export class AuthLogin {
             return { message: "", asignaciones: [] };
         }
     }
-    static async listarCitasPorDoctor(NombreDoctor: string): Promise<{ message: string; citas: unknown[] }> {
+    static async listarCitasPorDoctor(NombreDoctor: string): Promise<{ message: string; Citas: unknown[] }> {
         try {
             const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_BK_RUTA}/users/citasdoctor`,
+                `${process.env.NEXT_PUBLIC_BK_RUTA}/users/Citasdoctor`,
                 { NombreDoctor } // enviamos el nombre al backend
             );
 
             if (response.status === 200) {
-                // Asegurarse de que citas sea un array
-                const citas = Array.isArray(response.data?.citas) ? response.data.citas as Record<string, unknown>[] : [];
+                // Asegurarse de que Citas sea un array
+                const Citas = Array.isArray(response.data?.Citas) ? response.data.Citas as Record<string, unknown>[] : [];
                 return {
                     message: response.data.message || "Citas obtenidas correctamente",
-                    citas
+                    Citas
                 };
             } else {
-                return { message: "", citas: [] };
+                return { message: "", Citas: [] };
             }
         } catch (error) {
-            // Manejar específicamente 404 (no tiene citas asignadas)
+            // Manejar específicamente 404 (no tiene Citas asignadas)
             const err = error as { response?: { status?: number; data?: { message?: string } } };
             if (err.response?.status === 404) {
-                console.warn(`No se encontraron citas para el doctor ${NombreDoctor}`);
-                return { message: err.response.data?.message || "No hay citas", citas: [] };
+                console.warn(`No se encontraron Citas para el doctor ${NombreDoctor}`);
+                return { message: err.response.data?.message || "No hay Citas", Citas: [] };
             }
 
-            console.error("Error al listar citas por doctor:", error);
-            return { message: "", citas: [] };
+            console.error("Error al listar Citas por doctor:", error);
+            return { message: "", Citas: [] };
         }
     }
     static async listarDetalleGastos(): Promise<{ message: string; gastos: unknown[] }> {
