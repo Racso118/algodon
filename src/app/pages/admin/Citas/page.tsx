@@ -16,7 +16,7 @@ interface Cita {
 }
 
 export default function CitasPage() {
-  const [citas, setCitas] = useState<Cita[]>([]);
+  const [Citas, setCitas] = useState<Cita[]>([]);
   const [loading, setLoading] = useState(true);
   const [filtro, setFiltro] = useState({
     paciente: "",
@@ -39,7 +39,7 @@ export default function CitasPage() {
     setDPI(localStorage.getItem("dpi"));
   }, []);
 
-  // 🔹 Cargar citas según especialidad
+  // 🔹 Cargar Citas según especialidad
   useEffect(() => {
     const fetchCitas = async () => {
       try {
@@ -51,7 +51,7 @@ export default function CitasPage() {
           resp = await AuthLogin.listarCitas();
         }
 
-        if (resp && Array.isArray(resp.citas)) {
+        if (resp && Array.isArray(resp.Citas)) {
           type CitaRaw = {
             IdCita: number;
             DPI: string;
@@ -63,7 +63,7 @@ export default function CitasPage() {
             Razon: string;
             NombreEspecialista: string;
           };
-          const dataFormateada: Cita[] = resp.citas.map((c: unknown) => {
+          const dataFormateada: Cita[] = resp.Citas.map((c: unknown) => {
             const cita = c as CitaRaw;
             return {
               id: cita.IdCita,
@@ -80,7 +80,7 @@ export default function CitasPage() {
           setCitas(dataFormateada);
         }
       } catch (error) {
-        console.error("Error al obtener citas:", error);
+        console.error("Error al obtener Citas:", error);
       } finally {
         setLoading(false);
       }
@@ -91,7 +91,7 @@ export default function CitasPage() {
     }
   }, [nombre, especialidad, dpi]);
 
-  const citasFiltradas = citas.filter(
+  const CitasFiltradas = Citas.filter(
     (c) =>
       c.paciente.toLowerCase().includes(filtro.paciente.toLowerCase()) &&
       c.doctor.toLowerCase().includes(filtro.doctor.toLowerCase()) &&
@@ -152,7 +152,7 @@ export default function CitasPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center text-gray-600 text-lg">
-        Cargando citas...
+        Cargando Citas...
       </div>
     );
   }
@@ -168,7 +168,7 @@ export default function CitasPage() {
         </p>
       </div>
 
-      {/* Tabla de citas */}
+      {/* Tabla de Citas */}
       <div className="bg-white rounded-lg shadow p-4">
         <div className="overflow-x-auto">
           <table className="min-w-full border-collapse">
@@ -223,7 +223,7 @@ export default function CitasPage() {
               </tr>
             </thead>
             <tbody>
-              {citasFiltradas.map((cita) => (
+              {CitasFiltradas.map((cita) => (
                 <tr key={cita.id} className="hover:bg-gray-100">
                   <td className="border px-4 py-2">{cita.paciente}</td>
                   <td className="border px-4 py-2">{cita.especialista}</td>
@@ -266,8 +266,8 @@ export default function CitasPage() {
             </tbody>
           </table>
 
-          {citasFiltradas.length === 0 && (
-            <p className="text-center text-gray-500 mt-4">No se encontraron citas.</p>
+          {CitasFiltradas.length === 0 && (
+            <p className="text-center text-gray-500 mt-4">No se encontraron Citas.</p>
           )}
         </div>
       </div>
