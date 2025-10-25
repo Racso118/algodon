@@ -27,9 +27,9 @@ export default function PacientesPage() {
     setEspecialidad(localStorage.getItem("especialidad"));
   }, []);
 
-  // --- Tabla de pacientes / citas ---
+  // --- Tabla de pacientes / Citas ---
   const [pacientes, setPacientes] = useState<Paciente[]>([]);
-  const [citas, setCitas] = useState<Cita[]>([]);
+  const [Citas, setCitas] = useState<Cita[]>([]);
   const [loadingCitas, setLoadingCitas] = useState(false);
 
   const cargarPacientes = async () => {
@@ -51,14 +51,14 @@ export default function PacientesPage() {
       console.error("Error al cargar pacientes:", error);
     }
   };
-
+Citas
   const cargarCitas = async () => {
     if (!nombre) return;
     setLoadingCitas(true);
     try {
       const result = await AuthLogin.listarCitasPorDoctor(nombre);
-      if (Array.isArray(result.citas)) {
-        const citasFormateadas: Cita[] = result.citas.map((c: unknown) => {
+      if (Array.isArray(result.Citas)) {
+        const CitasFormateadas: Cita[] = result.Citas.map((c: unknown) => {
           const cita = c as Cita;
           return {
             IdCita: cita.IdCita,
@@ -67,12 +67,12 @@ export default function PacientesPage() {
             Estado: cita.Estado,
           };
         });
-        setCitas(citasFormateadas);
+        setCitas(CitasFormateadas);
       } else {
         setCitas([]);
       }
     } catch (error) {
-      console.error("Error al cargar citas por doctor:", error);
+      console.error("Error al cargar Citas por doctor:", error);
     }
     setLoadingCitas(false);
   };
@@ -159,7 +159,7 @@ export default function PacientesPage() {
         </p>
       </div>
 
-      {/* Tabla de pacientes o citas */}
+      {/* Tabla de pacientes o Citas */}
       <div className="bg-white rounded-lg shadow p-4">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold">{esGeneral ? "Pacientes" : "Citas Asignadas"}</h2>
@@ -257,14 +257,14 @@ export default function PacientesPage() {
               <tbody>
                 {loadingCitas ? (
                   <tr>
-                    <td colSpan={4} className="text-center py-4">Cargando citas...</td>
+                    <td colSpan={4} className="text-center py-4">Cargando Citas...</td>
                   </tr>
-                ) : citas.length === 0 ? (
+                ) : Citas.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="text-center py-4">No hay citas asignadas</td>
+                    <td colSpan={4} className="text-center py-4">No hay Citas asignadas</td>
                   </tr>
                 ) : (
-                  citas.map((c) => (
+                  Citas.map((c) => (
                     <tr key={c.IdCita} className="hover:bg-gray-100">
                       <td className="border px-4 py-2">{c.IdCita}</td>
                       <td className="border px-4 py-2">{c.NombrePaciente}</td>

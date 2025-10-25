@@ -32,12 +32,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const rutasBase: Ruta[] = [
     { id: "finanzas", title: "Finanzas", url: "/pages/admin/Finanzas", rol: "Admin", icon: <FaMoneyBillWave className="inline mr-2" /> },
     { id: "usuarios", title: "Usuarios", url: "/pages/admin/Usuarios", rol: "Admin", icon: <FaUsers className="inline mr-2" /> },
-    { id: "citas", title: "Citas", url: "/pages/admin/Citas", rol: "Admin", icon: <FaCalendarAlt className="inline mr-2" /> },
+    { id: "Citas", title: "Citas", url: "/pages/admin/Citas", rol: "Admin", icon: <FaCalendarAlt className="inline mr-2" /> },
     { id: "transacciones", title: "Transacciones", url: "/pages/admin/Transacciones", rol: "Admin", icon: <FaWallet className="inline mr-2" /> },
     { id: "asignado", title: "Informacion", url: "/pages/admin/EnfermerosAsignados", rol: "Enfermero", icon: <FaChartBar className="inline mr-2" /> },
     { id: "cobros", title: "Cobros", url: "/pages/admin/Cobros", rol: "Admin", icon: <FaCoins className="inline mr-2" /> },
     { id: "donaciones", title: "Donaciones", url: "/pages/admin/Donaciones", rol: "Admin", icon: <FaCoins className="inline mr-2" /> },
-    { id: "citas", title: "Citas", url: "/pages/admin/Citas", rol: "Paciente", icon: <FaUsers className="inline mr-2" /> },
+    { id: "Citas", title: "Citas", url: "/pages/admin/Citas", rol: "Paciente", icon: <FaUsers className="inline mr-2" /> },
     { id: "cobros", title: "Cobros", url: "/pages/admin/Cobros", rol: "Paciente", icon: <FaCoins className="inline mr-2" /> },
   ];
 
